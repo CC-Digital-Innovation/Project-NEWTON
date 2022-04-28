@@ -12,4 +12,4 @@ theme: uncover
 # Ben Verley
 ### DevOps Engineer
 B.S. Information Technology - ASU
-![bg right](Ben.jpg)
+![bg right](Photos/Ben.jpg)
