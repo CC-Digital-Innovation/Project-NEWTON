@@ -1,12 +1,12 @@
 [tokens]
-api_token =
+api_token = Token for cmdb api
 
 
 [snow]
-snow_instance       = 
-api_user            = 
-api_password        = 
-api_key             = 
+snow_instance       = snow instance
+api_user            = snow api user
+api_password        = snow api password
+api_key             = snow api key
 
 [urls]
-snow_base       =
+snow_base       = snow url
