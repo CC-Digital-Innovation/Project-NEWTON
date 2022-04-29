@@ -1,0 +1,12 @@
+[tokens]
+api_token =
+
+
+[snow]
+snow_instance       = 
+api_user            = 
+api_password        = 
+api_key             = 
+
+[urls]
+snow_base       =
