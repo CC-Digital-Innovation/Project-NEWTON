@@ -1,16 +1,24 @@
 import pandas as pd
 import json
+import loguru
 import pydotplus
 from sklearn import tree
 from sklearn.tree import DecisionTreeClassifier
+from loguru import logger
 import matplotlib.pyplot as plot
 import matplotlib.image as img
+import os
 
+#Directories
+cwd = os.getcwd()
+pymoddir = os.path.join(cwd, "pymods")
+dectreedir = os.path.join(pymoddir,"decisiontree")
+trainsetpath = os.path.join(dectreedir, "trainset.json")
 
 #Creates a decision tree and trains it using a training set in trainset.json
 def train_tree():
     #open and read contents of trainset
-    with open("trainset.json", "r") as f:
+    with open(trainsetpath, "r") as f:
         train_data_json = f.read()
 
     #put training set into pandas df
@@ -32,10 +40,6 @@ def graph_tree(dectree: DecisionTreeClassifier,features):
     data = tree.export_graphviz(dectree, out_file=None, feature_names=features)
     graph = pydotplus.graph_from_dot_data(data)
     graph.write_png("dectree.png")
-
-    helo = img.imread("dectree.png")
-    plt = plot.imshow(helo)
-    plot.show()
 
 #Run predictions on incoming values
 def predict(dectree: DecisionTreeClassifier, values):

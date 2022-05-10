@@ -12,4 +12,6 @@ theme: uncover
 # Ben Verley
 ### DevOps Engineer
 B.S. Information Technology - ASU
-![bg right](Photos/Ben.jpg)
+![bg right](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/Project%20Presentation/Photos/Ben.jpg?token=GHSAT0AAAAAABUBP6YED45JZO4JFYSTNWE4YTQG5SQ)
+
+---
