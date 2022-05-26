@@ -129,5 +129,7 @@ dmypy.json
 .pyre/
 
 #Config
-/Config
+config.ini
 writeresults.txt
+deviceData.json
+/.tours

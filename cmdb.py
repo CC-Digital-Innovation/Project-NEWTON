@@ -29,7 +29,7 @@ def get_matching_devices(   token: str = Form(...),
                             modelNumsList: list = Form(None),
                             manufacturerList: list = Form(None)):
     #Authenticate with token in config                        
-    if token == config.get('tokens', 'api_token'):
+    if token == config.get('tokens', 'cmdb_api_token'):
         table = snow_client.resource(api_path='/table/cmdb_ci')
         print(manufacturerList)
         print(modelNumsList)

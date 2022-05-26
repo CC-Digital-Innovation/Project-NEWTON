@@ -1,6 +1,6 @@
 [tokens]
 api_token = Token for cmdb api
-
+email_api_token =
 
 [snow]
 snow_instance       = snow instance
@@ -10,3 +10,11 @@ api_key             = snow api key
 
 [urls]
 snow_base       = snow url
+cmdb_api        = 
+email_api       =
+
+[EmailAPIData]
+ID          = 
+recipients  = 
+cc          = 
+bcc         = 
