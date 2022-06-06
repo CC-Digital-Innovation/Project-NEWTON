@@ -2,6 +2,7 @@ import configparser
 import pysnow
 import os
 import requests
+from requests.auth import HTTPBasicAuth
 from fastapi.params import Query, Body, Form
 from pydantic.types import FilePath
 from fastapi import FastAPI
@@ -21,6 +22,13 @@ INSTANCE = config.get('snow', 'snow_instance')
 snow_client = pysnow.Client(instance = INSTANCE, user = USER, password = PASS)
 
 
+
+def get_value(link, value):
+    r = requests.get(link, auth = HTTPBasicAuth(USER, PASS))
+    return r.json()['result'][value]
+   
+
+
 #Define a get function for the api based on model number, manufacturer and version
 @app.get("/models/")
 def get_matching_devices(   token: str = Form(...),
@@ -31,8 +39,6 @@ def get_matching_devices(   token: str = Form(...),
     #Authenticate with token in config                        
     if token == config.get('tokens', 'cmdb_api_token'):
         table = snow_client.resource(api_path='/table/cmdb_ci')
-        print(manufacturerList)
-        print(modelNumsList)
         if (modelNumsList and manufacturerList) and len(modelNumsList)==len(manufacturerList):
             stringQuery = ""
             for modelNum, man in zip(modelNumsList, manufacturerList):
@@ -53,7 +59,7 @@ def get_matching_devices(   token: str = Form(...),
                 slim = {}
                 slim["Device Name"] = device['name']
                 slim["Model"] = device['model_number']
-                slim["Customer"] = device['company']
+                slim["Customer"] = get_value(device['company']['link'], 'name')
                 slimmedDevices.append(slim)
             return slimmedDevices
         elif (modelNum and manufacturer) and not (modelNumsList and manufacturerList):
@@ -70,7 +76,7 @@ def get_matching_devices(   token: str = Form(...),
             for device in fetch:
                 slim["Device Name"] = device['name']
                 slim["Model"] = device['model_number']
-                slim["Customer"] = device['company']
+                slim["Customer"] = get_value(device['company']['link'], 'name')
                 slimmedDevices.append(slim)
             return slimmedDevices
         else:

@@ -6,6 +6,7 @@ import pymods.decisiontree.decisiontree as classify
 import pymods.nvd as nvd
 import pymods.search as search
 import pymods.emailReporter as email
+import pymods.noco as dbsave
 
 
 #Main function to coordinate function calls
@@ -53,7 +54,7 @@ def main():
             setattr(cve, "actionable", False)
     input("predictions complete, press enter to search CMDB")
     for cve in cves:
-        if cve.actionable:
+        if cve.actionable and cve.cveID != "CVE-2020-3428":
             logger.info(f"Searching CMDB for impacted devices and sending email for {cve.cveID}")
             devs = search.cmdb(cve)
             reportName = f"Alert for: {cve.cveID}"
@@ -70,8 +71,8 @@ def main():
             with open ("deviceData.json", "w") as f:
                 f.write(json.dumps(devs))
             logger.info("Sending level 1 email")
-            r = email.report(reportName, tableTitle,"deviceData.json", body, subject)
-            #Save to db
+            #r = email.report(reportName, tableTitle,"deviceData.json", body, subject)
+            dbsave.insert(cve, devs)
 
         
 
