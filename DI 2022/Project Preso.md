@@ -21,10 +21,18 @@ this is content
 
 ---
 # Team Wayne Newton
-ORG CHART (STEFAN)
+![bg left](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/Wayne%20Newtons%20(1).png)
+- **Ben Verley** - Lead developer
+- **Mike Wojke** - Team Old Guy
+- **Paige Wagoner** - Team PM
+- **VB Mehta** - Technical Resource
+- **Chris Vik** - Technical Resource
+- **Stefan Axelson** - Technical Resource
+- **Chris Villasenor** - Technical Resource
 
 ---
 # Execution
+Include initiation phase and SDLC
 
 ---
 ## Discovery
@@ -53,7 +61,7 @@ ORG CHART (STEFAN)
 # Outcome (MVP)
 
 ---
-## "Shortcuts" Taken to Reach MVP/POC
+## How we reached MVP/POC
 - **CVE configs have 3 configuration formats (simple, versioned, complex)**
     * Simple: just CPE string
     * Versioned: CPE string and version start/end
