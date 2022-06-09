@@ -31,10 +31,13 @@ marp: true
 
 ---
 # Execution
-Include initiation phase and SDLC
+![bg contain](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/Execution.png)
 
 ---
-## Discovery
+## Analysis
+
+---
+## Defining
 - Discovery at existing customer environments to confirm inventory, hardware model # and software version
 - True up SNOW CMDB for chosen customers
 - Standardize device software per model for all supported devices
@@ -43,7 +46,7 @@ Include initiation phase and SDLC
 - Research solutions to classify CVEs, how CVEs store model #, and how to implement decision tree
 
 ---
-## Implementation
+## Designing
 - Retrieve CVEs from database
 - Classify CVEs into critical to our systems or not
 - Grab model #'s/firmware versions from the CVE and search our CMDB for potentially effected devices
@@ -54,7 +57,13 @@ Include initiation phase and SDLC
 - *Create a matrix of vulnerable devices to XS engineers to work from to confirm when patches are applied and secure*
 
 ---
-![bg contain](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/Execution.png)
+## Building
+
+---
+## Testing
+
+---
+## Evaluation
 
 ---
 # Outcome (MVP)
