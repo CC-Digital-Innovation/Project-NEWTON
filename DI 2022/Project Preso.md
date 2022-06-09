@@ -3,7 +3,6 @@ marp: true
 ---
 
 # Project N.E.W.T.O.N.
-this is content
 ## Nefarious Event Warnings Targeting OS Noncompliance
 ### Team Wayne Newton
 ### Digital Innovation Project 2022
