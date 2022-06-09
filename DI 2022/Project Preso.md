@@ -21,7 +21,7 @@ marp: true
 ---
 # Team Wayne Newton
 ![bg left](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/Wayne%20Newtons%20(1).png)
-- **Ben Verley** - Lead developer
+- **Ben Verley** - Lead Developer
 - **Mike Wojke** - Team Old Guy
 - **Paige Wagoner** - Team PM
 - **VB Mehta** - Technical Resource
@@ -35,6 +35,14 @@ marp: true
 
 ---
 ## Analysis
+- Create Slack channel
+- Identify topic for project
+- Schedule weekly meetings
+- Identify team and project name
+- Complete project template
+- Create project dashboard in smartsheets
+- Download Visual Studio Code
+- Create personal and project git repos
 
 ---
 ## Defining
@@ -96,6 +104,10 @@ marp: true
 
 ---
 # Demo
+
+---
+## Decision Tree
+![bg contain](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/decision%20tree.png)
 
 ---
 # Anything we would have done differently? How we think it would have impacted outcome
