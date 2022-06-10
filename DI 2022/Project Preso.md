@@ -30,19 +30,29 @@ marp: true
 - **Chris Villasenor** - Technical Resource
 
 ---
+<style scoped>
+    h1 {
+        text-align: center
+    }
+    img {
+        display: block;
+ margin-left: auto;
+ margin-right: auto;
+    }
+</style>
 # Execution
-![bg contain](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/Execution.png)
+![width:2000 height:500](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/Execution.png)
 
 ---
-## Analysis
-- Create Slack channel
-- Identify topic for project
+## Analysis/Planning
+- Create slack channel
 - Schedule weekly meetings
-- Identify team and project name
-- Complete project template
-- Create project dashboard in smartsheets
-- Download Visual Studio Code
-- Create personal and project git repos
+- Identify topic for project
+- Gather requirements and identify risks
+- Confirm capability to complete project
+- Assign roles
+- Investigation of each role
+- Coding
 
 ---
 ## Defining
@@ -74,7 +84,7 @@ marp: true
 ## Evaluation
 
 ---
-# Outcome (MVP)
+![bg contain](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/mvp.png)
 
 ---
 ## How we reached MVP/POC
@@ -103,11 +113,24 @@ marp: true
     * Expand configs once that's established
 
 ---
-# Demo
+![bg](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/product-demo-themes.jpg)
 
 ---
+<style scoped>
+    h2 {
+        text-align: center
+    }
+    img {
+        display: block;
+ margin-left: auto;
+ margin-right: auto;
+    }
+</style>
 ## Decision Tree
-![bg contain](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/decision%20tree.png)
+![width:650 height:600](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/decision%20tree.png)
+
+---
+# What did we learn about ourselves and each other
 
 ---
 # Anything we would have done differently? How we think it would have impacted outcome
