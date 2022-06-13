@@ -75,10 +75,24 @@ marp: true
 - *Create a matrix of vulnerable devices to XS engineers to work from to confirm when patches are applied and secure*
 
 ---
-## Mind Map (Building & Testing)
+<style scoped>
+    h2 {
+        text-align: center
+    }
+    img {
+        display: block;
+ margin-left: auto;
+ margin-right: auto;
+    }
+</style>
+## Building & Testing
+![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/BuildTest.png?token=GHSAT0AAAAAABVL2O2SJODMNAZN2PP35FESYVHSVFQ)
 
 ---
-## Evaluation
+## Deployment
+- Initial deployment through local resources (laptop)
+- Test plan/MVP iterations
+- Planned product release in container to be available at all times for ad hoc searches
 
 ---
 ![bg contain](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/mvp.png)
@@ -128,6 +142,9 @@ marp: true
 
 ---
 # What did we learn about ourselves and each other
+- Ben is a badass coder!
+- Team projects > Personal projects
+- Vik is a closet Wayne Newton fan
 
 ---
 # Anything we would have done differently? How we think it would have impacted outcome
