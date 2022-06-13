@@ -40,19 +40,19 @@ marp: true
  margin-right: auto;
     }
 </style>
-# Execution
+# Execution (SDLC)
 ![width:2000 height:500](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/Execution.png)
 
 ---
 ## Analysis/Planning
 - Create slack channel
+- Create project dashboard
 - Schedule weekly meetings
 - Identify topic for project
 - Gather requirements and identify risks
 - Confirm capability to complete project
-- Assign roles
-- Investigation of each role
-- Coding
+- Assign roles and investigation of each role
+- Define workflow for code to follow
 
 ---
 ## Defining
@@ -75,10 +75,7 @@ marp: true
 - *Create a matrix of vulnerable devices to XS engineers to work from to confirm when patches are applied and secure*
 
 ---
-## Building
-
----
-## Testing
+## Mind Map (Building & Testing)
 
 ---
 ## Evaluation
