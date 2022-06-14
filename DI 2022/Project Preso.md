@@ -40,8 +40,8 @@ marp: true
  margin-right: auto;
     }
 </style>
-# Execution (SDLC)
-![width:2000 height:500](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/Execution.png)
+# Execution
+![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/SDLC.jpeg?token=GHSAT0AAAAAABVL2O2SWOZWQZWAFYXLMQRMYVIS2EQ)
 
 ---
 ## Analysis/Planning
