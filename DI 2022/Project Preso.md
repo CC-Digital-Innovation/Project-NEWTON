@@ -41,7 +41,7 @@ marp: true
     }
 </style>
 # Execution
-![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/SDLC.jpeg?token=GHSAT0AAAAAABVL2O2SWOZWQZWAFYXLMQRMYVIS2EQ)
+![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/SDLC.jpeg?token=GHSAT0AAAAAABVL2O2SRHKHZAZVXRNURHL6YVJ7PFA)
 
 ---
 ## Analysis/Planning (project dashboard image)
@@ -86,7 +86,7 @@ marp: true
     }
 </style>
 ## Building & Testing
-![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/BuildTest.png?token=GHSAT0AAAAAABVL2O2SJODMNAZN2PP35FESYVHSVFQ)
+![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/BuildTest.png?token=GHSAT0AAAAAABVL2O2TR7AFRAFYYLXTOJHQYVJ7POA)
 
 ---
 ![bg contain](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/mvp.png)
