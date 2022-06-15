@@ -17,17 +17,18 @@ marp: true
 - Reduce time to value for our customers
 - Increase XS stickiness in an account
 - This function can be mentioned/listed in sales discussions as another valuable service delivered by DI XS
+<!--- This will render as notes in the html presentation view --->
 
 ---
 # Team Wayne Newton
 ![bg left](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/Wayne%20Newtons%20(1).png)
 - **Ben Verley** - Lead Developer
-- **Mike Wojke** - Team Old Guy
 - **Paige Wagoner** - Team PM
 - **VB Mehta** - Technical Resource
 - **Chris Vik** - Technical Resource
 - **Stefan Axelson** - Technical Resource
 - **Chris Villasenor** - Technical Resource
+- **Mike Wojke** - Team Old Guy
 
 ---
 <style scoped>
@@ -44,10 +45,10 @@ marp: true
 ![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/SDLC.jpeg?token=GHSAT0AAAAAABVL2O2SWOZWQZWAFYXLMQRMYVIS2EQ)
 
 ---
-## Analysis/Planning
-- Create slack channel
-- Create project dashboard
-- Schedule weekly meetings
+## Analysis/Planning (project dashboard image)
+- Create slack channel "2022-di-team-wayne-newton"
+- Create project dashboard (https://app.smartsheet.com/dashboards/pRF3FgcfM8Wp7RQc2FXQP23Q493qGW66P3G3Fm31)
+- Schedule weekly meetings (2x a week - Tues, Thurs)
 - Identify topic for project
 - Gather requirements and identify risks
 - Confirm capability to complete project
@@ -55,10 +56,10 @@ marp: true
 - Define workflow for code to follow
 
 ---
-## Defining
-- Discovery at existing customer environments to confirm inventory, hardware model # and software version
-- True up SNOW CMDB for chosen customers
+## Defining (Ben image)
+- Discovery at existing customer environments to confirm inventory, vendor, and hardware model #
 - Standardize device software per model for all supported devices
+- True up SNOW CMDB for chosen customers
 - Define alerting, common threats, monitoring parameters and user interface
 - Identify SNOW integration/data retrieval methods
 - Research solutions to classify CVEs, how CVEs store model #, and how to implement decision tree
@@ -67,11 +68,11 @@ marp: true
 ## Designing
 - Retrieve CVEs from database
 - Classify CVEs into critical to our systems or not
-- Grab model #'s/firmware versions from the CVE and search our CMDB for potentially effected devices
+- Grab hardware vendor model #'s from the CVE and search our CMDB for potentially effected devices
 - Compile a list of devices, customers, etc and send out this list via email
 ## *Future Phase Enhancements*
 - *Auto check vendor support sites for availability of security patches related to the discovered CVE*
-- *Auto check of devices in our CMDB to check CVE db for*
+- *Auto check/update for new device models in CMDB for project N.E.W.T.O.N. to check on CVE's for*
 - *Create a matrix of vulnerable devices to XS engineers to work from to confirm when patches are applied and secure*
 
 ---
@@ -89,13 +90,13 @@ marp: true
 ![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/BuildTest.png?token=GHSAT0AAAAAABVL2O2SJODMNAZN2PP35FESYVHSVFQ)
 
 ---
+![bg contain](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/mvp.png)
+
+---
 ## Deployment
 - Initial deployment through local resources (laptop)
 - Test plan/MVP iterations
 - Planned product release in container to be available at all times for ad hoc searches
-
----
-![bg contain](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/mvp.png)
 
 ---
 ## How we reached MVP/POC
@@ -112,13 +113,13 @@ marp: true
 
 ---
 ## Challenges & Solutions
+- **CMDB matching**
+    * Search CMDB with manufacturer name and pure # of model # yields results
 - **Getting CPE strings in the json formatted CVE**
     * Recursive function to iterate over children
 - **Figuring out a way to quantify "impact to us"**
     * Code looks at manufacture and compares against a list
     * If manufacturer is Cisco, that is given value 1. If other, value 0
-- **CMDB matching**
-    * Search CMDB with manufacturer name and pure # of model # yields results
 - **CVE configuration complexity**
     * Grab all CPE strings as that is the simplest format to work with
     * Expand configs once that's established
@@ -145,6 +146,12 @@ marp: true
 - Ben is a badass coder!
 - Team projects > Personal projects
 - Vik is a closet Wayne Newton fan
+- Marp and Markdown isn't as bad as it seems
 
 ---
 # Anything we would have done differently? How we think it would have impacted outcome
+- Neural Network instead of Decision Tree
+- Allowed for better machine learning algorithms
+
+---
+# Thank You Very Much! Questions?
