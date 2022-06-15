@@ -17,7 +17,6 @@ marp: true
 - Reduce time to value for our customers
 - Increase XS stickiness in an account
 - This function can be mentioned/listed in sales discussions as another valuable service delivered by DI XS
-<!--- This will render as notes in the html presentation view --->
 
 ---
 # Team Wayne Newton
@@ -105,7 +104,7 @@ marp: true
     * Versioned: CPE string and version start/end
     * Complex: CPE string and complimentary parts that have additional CPE strings
 - **Only searching CMDB for model # and manufacturers that match CPE string**
-    * Software and Firmware versions are not stored in CMDB
+    * Firmware versions are not stored in CMDB
     * Not demo-able
 - **Model # CMDB search**
     * Right now, only searching for numeric model # and manufacturer
@@ -150,8 +149,8 @@ marp: true
 
 ---
 # Anything we would have done differently? How we think it would have impacted outcome
+- Could have applied different machine learning algorithms
 - Neural Network instead of Decision Tree
-- Allowed for better machine learning algorithms
 
 ---
 # Thank You Very Much! Questions?
