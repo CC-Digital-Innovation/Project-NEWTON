@@ -17,6 +17,7 @@ marp: true
 - Reduce time to value for our customers
 - Increase XS stickiness in an account
 - This function can be mentioned/listed in sales discussions as another valuable service delivered by DI XS
+<!--- This will render as notes in the html presentation view --->
 
 ---
 # Team Wayne Newton
@@ -44,7 +45,7 @@ marp: true
 ![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/SDLC.jpeg?token=GHSAT0AAAAAABVL2O2SRHKHZAZVXRNURHL6YVJ7PFA)
 
 ---
-## Analysis/Planning (project dashboard image)
+## Analysis/Planning
 - Create slack channel "2022-di-team-wayne-newton"
 - Create project dashboard (https://app.smartsheet.com/dashboards/pRF3FgcfM8Wp7RQc2FXQP23Q493qGW66P3G3Fm31)
 - Schedule weekly meetings (2x a week - Tues, Thurs)
