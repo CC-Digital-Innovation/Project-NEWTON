@@ -55,9 +55,8 @@ marp: true
 - Define workflow for code to follow
 
 ---
-## Defining (Ben image)
+## Defining
 - Discovery at existing customer environments to confirm inventory, vendor, and hardware model #
-- Standardize device software per model for all supported devices
 - True up SNOW CMDB for chosen customers
 - Define alerting, common threats, monitoring parameters and user interface
 - Identify SNOW integration/data retrieval methods
@@ -130,29 +129,27 @@ flowchart TD
 
 ---
 ## How we reached MVP/POC
+- **Established initial requirements of hardware vendor and model #**
 - **CVE configs have 3 configuration formats (simple, versioned, complex)**
-    * Simple: just CPE string
-    * Versioned: CPE string and version start/end
-    * Complex: CPE string and complimentary parts that have additional CPE strings
-- **Only searching CMDB for model # and manufacturers that match CPE string**
-    * Firmware versions are not stored in CMDB
-    * Not demo-able
+    - Simple: just CPE string
+    - Versioned: CPE string and version start/end
+    - Complex: CPE string and complimentary parts that have additional CPE strings
 - **Model # CMDB search**
-    * Right now, only searching for numeric model # and manufacturer
-    * Larger data structure must be hashed out
+    - Right now, only searching for numeric model # and manufacturer
+    - Larger data structure must be hashed out
 
 ---
 ## Challenges & Solutions
 - **CMDB matching**
-    * Search CMDB with manufacturer name and pure # of model # yields results
+    - Search CMDB with manufacturer name and pure # of model # yields results
 - **Getting CPE strings in the json formatted CVE**
-    * Recursive function to iterate over children
+    - Recursive function to iterate over children
 - **Figuring out a way to quantify "impact to us"**
-    * Code looks at manufacture and compares against a list
-    * If manufacturer is Cisco, that is given value 1. If other, value 0
+    - Code looks at manufacture and compares against a list
+    - If manufacturer is Cisco, that is given value 1. If other, value 0
 - **CVE configuration complexity**
-    * Grab all CPE strings as that is the simplest format to work with
-    * Expand configs once that's established
+    - Grab all CPE strings as that is the simplest format to work with
+    - Expand configs once that's established
 
 ---
 ![bg](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/product-demo-themes.jpg)
