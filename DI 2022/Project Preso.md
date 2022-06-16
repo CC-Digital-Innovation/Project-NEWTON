@@ -17,7 +17,6 @@ marp: true
 - Reduce time to value for our customers
 - Increase XS stickiness in an account
 - This function can be mentioned/listed in sales discussions as another valuable service delivered by DI XS
-<!--- This will render as notes in the html presentation view --->
 
 ---
 # Team Wayne Newton
@@ -42,7 +41,7 @@ marp: true
     }
 </style>
 # Execution
-![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/SDLC.jpeg?token=GHSAT0AAAAAABVL2O2SRHKHZAZVXRNURHL6YVJ7PFA)
+![width:2000 height:500](/DI%202022/Images/SDLC.jpeg?token=GHSAT0AAAAAABVL2O2SRHKHZAZVXRNURHL6YVJ7PFA)
 
 ---
 ## Analysis/Planning
@@ -87,7 +86,36 @@ marp: true
     }
 </style>
 ## Building & Testing
-![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/BuildTest.png?token=GHSAT0AAAAAABVL2O2TR7AFRAFYYLXTOJHQYVJ7POA)
+
+<div class = "mermaid">
+
+flowchart LR
+    A[CVE Classifier Code] -->B{CMDB Search}
+    A[CVE Classifier Code] -->C{Vulnerabilities}
+    A[CVE Classifier Code] -->D{Workflow}
+    C -->e[Research CVE Pieces]
+    C -->ee[Make A Decision Tree]
+    B -->f[Generate Affected List]
+    B -->ff[Ensure Searchability]
+    B -->fff[Search DMDB]
+    D -->g[Get CVEs]
+    g -->h(Classify CVEs)
+    h -->i(Actionable)
+    h -->ii(Not Actionable)
+    ii -->j[Ignore]
+    i -->jj[Search Cmdb]
+    jj -->k[Email/Alert]
+    jj -->kk[Track hits in DB]
+    e -->l[Best Way to search for CVE]
+    e -->ll[Filter CVE data]
+    e -->lll[Generate Test/Training Set]
+    e -->llll[Learn about CPE strings]
+    ee -->m[Learn how to use pymodules]
+    m -->n[Sklearn]
+    m -->nn[NumPy]
+    m -->nnn[Pandas]
+
+</div>
 
 ---
 ![bg contain](https://raw.githubusercontent.com/pwagoner/Wayne-Newton/main/mvp.png)
