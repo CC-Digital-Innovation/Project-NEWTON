@@ -41,7 +41,7 @@ marp: true
     }
 </style>
 # Execution
-![width:2000 height:500](/DI%202022/Images/SDLC.jpeg?token=GHSAT0AAAAAABVL2O2SRHKHZAZVXRNURHL6YVJ7PFA)
+![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/SDLC.jpeg?token=GHSAT0AAAAAABUNZTJS32AUS5EJ6KSHHGCEYVLNZXQ)
 
 ---
 ## Analysis/Planning
@@ -87,9 +87,12 @@ marp: true
 </style>
 ## Building & Testing
 
-<div class = "mermaid">
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});
+</script>
 
-flowchart LR
+<div class = "mermaid">
+flowchart TD
     A[CVE Classifier Code] -->B{CMDB Search}
     A[CVE Classifier Code] -->C{Vulnerabilities}
     A[CVE Classifier Code] -->D{Workflow}
@@ -114,7 +117,6 @@ flowchart LR
     m -->n[Sklearn]
     m -->nn[NumPy]
     m -->nnn[Pandas]
-
 </div>
 
 ---
