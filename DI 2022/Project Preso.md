@@ -41,7 +41,7 @@ marp: true
     }
 </style>
 # Execution
-![width:2000 height:500](https://raw.githubusercontent.com/CC-Digital-Innovation/Project-NEWTON/main/DI%202022/Images/SDLC.jpeg?token=GHSAT0AAAAAABUNZTJS32AUS5EJ6KSHHGCEYVLNZXQ)
+![width:2000 height:500](https://raw.githubusercontent.com/Bverley92/DI-2022-Personal-Preso/main/Photos/SDLC.jpeg)
 
 ---
 ## Analysis/Planning
