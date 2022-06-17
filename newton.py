@@ -71,7 +71,7 @@ def main():
             with open ("deviceData.json", "w") as f:
                 f.write(json.dumps(devs))
             logger.info("Sending level 1 email")
-            #r = email.report(reportName, tableTitle,"deviceData.json", body, subject)
+            r = email.report(reportName, tableTitle,"deviceData.json", body, subject)
             #Do a pull from db and check for redundancy
             dbsave.insert(cve, devs)
 

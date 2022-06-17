@@ -99,7 +99,7 @@ flowchart TD
     C -->ee[Make A Decision Tree]
     B -->f[Generate Affected List]
     B -->ff[Ensure Searchability]
-    B -->fff[Search DMDB]
+    B -->fff[Search CMDB]
     D -->g[Get CVEs]
     g -->h(Classify CVEs)
     h -->i(Actionable)
