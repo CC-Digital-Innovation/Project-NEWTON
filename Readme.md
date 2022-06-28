@@ -1,4 +1,4 @@
-# Email-API
+# NEWTON
 ## Summary
 This project pulls Common Vulnerabilities and exposures from the [National Vulnerability database](https://nvd.nist.gov/vuln/search) that were modified in the 12 hour window prior to code execution. It then uses a decision tree algorithm to classify CVEs as critial to our systems or not. Once they have been classified, action steps are taken to search our CMDB, compile a list of potentially affected devices, email that list, and save results to a db for eventual automated upkeep. 
 
