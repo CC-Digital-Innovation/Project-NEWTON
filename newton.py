@@ -24,21 +24,22 @@ def main():
     startdate = today.strftime("%Y-%m-%dT%H:%M:%S:000 UTC-05:00")
     enddate   = timerange.strftime("%Y-%m-%dT%H:%M:%S:000 UTC-05:00")
 
-    startdate =   "2021-10-06T23:05:07:000 UTC-04:00"
-    enddate   =   "2021-10-07T23:05:07:000 UTC-04:00"
     logger.info(f"Getting Critical Vulnerabilities from National Vulnerability Database")
     logger.info(f"From: {startdate}")
     logger.info(f"To: {enddate}")
     raw = nvd.get_from_nvd(startdate, enddate)
-    input("Vulnerabilities retrieved, press enter to continue")
+
+    #Call mods to filter data
     logger.info("Beggining to filter CVE data")
     cves = nvd.generate_cve_list(raw)
     logger.info("Quantifying data for decision tree")
     nvd.qunatify_Mans(cves)
-    input("CVEs filetered and quantified, press enter to continue")
+    
+    #Spin up and train Decision Tree
     logger.info("Initializing Decision Tree Classifier")
     CVEclassifier = classify.train_tree()
-    input("Decision tree initialized, press enter to process cves")
+    
+    #Use tree to classify CVEs
     logger.info("Using classifier to determine cve impact on our systems")
     for cve in cves:
         logger.info(f"Classifying cve: {cve.cveID}")
@@ -52,9 +53,10 @@ def main():
                 logger.info(f"Actionable?: {cve.actionable}")
         else:
             setattr(cve, "actionable", False)
-    input("predictions complete, press enter to search CMDB")
+    
+    #Take action on actionable CVEs
     for cve in cves:
-        if cve.actionable and cve.cveID != "CVE-2020-3428":
+        if cve.actionable:
             logger.info(f"Searching CMDB for impacted devices and sending email for {cve.cveID}")
             devs = search.cmdb(cve)
             reportName = f"Alert for: {cve.cveID}"
@@ -72,8 +74,11 @@ def main():
                 f.write(json.dumps(devs))
             logger.info("Sending level 1 email")
             r = email.report(reportName, tableTitle,"deviceData.json", body, subject)
-            #Do a pull from db and check for redundancy
+            
+            #TODO: Do a pull from db and check for redundancy
             dbsave.insert(cve, devs)
+
+            #TODO: Create Snow incidents
 
         
 

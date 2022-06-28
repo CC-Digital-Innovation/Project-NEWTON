@@ -1,6 +1,6 @@
 [tokens]
-api_token = Token for cmdb api
-email_api_token =
+api_token       = Token for cmdb api
+email_api_token = Token for email API
 
 [snow]
 snow_instance       = snow instance
@@ -10,11 +10,12 @@ api_key             = snow api key
 
 [urls]
 snow_base       = snow url
-cmdb_api        = 
-email_api       =
+cmdb_api        = cmdb url
+email_api       = email api url
+noco_base       = noco db url
 
 [EmailAPIData]
-ID          = 
-recipients  = 
-cc          = 
-bcc         = 
+ID          = any number
+recipients  = recievers of email
+cc          = ccs
+bcc         = bccs

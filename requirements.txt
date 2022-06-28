@@ -1,4 +1,8 @@
 matplotlib
--U scikit-learn
+scikit-learn
 pydotplus
 loguru
+fastapi
+pandas
+uvicorn
+requests
