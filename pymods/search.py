@@ -34,4 +34,5 @@ def cmdb(cve):
         action_devices.append(result)
     logger.info(f"Number of matching model numbers in cmdb for {cve.cveID}: {len(action_devices)}")
 
+
     return action_devices

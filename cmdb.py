@@ -51,7 +51,7 @@ def get_matching_devices(   token: str = Form(...),
                 .NQ()"""
             stringQuery = stringQuery.strip(".NQ()")
             stringQuery = stringQuery.strip("\n")
-            #Query and return devices that match
+            #Query and return devices that match TODO: Find a way to not use eval
             RPquery = eval(f"(pysnow.QueryBuilder(){stringQuery})")
             fetch = table.get(query=RPquery).all()
             slimmedDevices = []

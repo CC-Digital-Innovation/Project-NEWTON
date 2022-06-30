@@ -54,6 +54,9 @@ def main():
         else:
             setattr(cve, "actionable", False)
     
+    #pull current cves in db for redundancy check
+    currentcves = dbsave.querycolumnlist("CVEID", "Active_CVES")
+
     #Take action on actionable CVEs
     for cve in cves:
         if cve.actionable:
@@ -75,8 +78,13 @@ def main():
             logger.info("Sending level 1 email")
             r = email.report(reportName, tableTitle,"deviceData.json", body, subject)
             
-            #TODO: Do a pull from db and check for redundancy
-            dbsave.insert(cve, devs)
+            #check for redundancy
+            if cve.cveID not in currentcves:
+                logger.info(f"{cve.cveID} not in Database, saving data")
+                dbsave.insert(cve, devs)
+            else:
+                logger.info(f"{cve.cveID} already saved in DB")
+                #TODO: check for updates
 
             #TODO: Create Snow incidents
 

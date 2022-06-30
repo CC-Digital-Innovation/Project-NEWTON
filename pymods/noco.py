@@ -26,7 +26,20 @@ def queryOne(fields, where, table):
     result = results[0]
     return result
 
+def querycolumnlist(column, table):
+    query = {
+        'column_name': column
+    }
+    sr = requests.get(f"{url}{table}/groupby", headers=header, params=query)
+    results = sr.json()
+    current = []
+    for stored in results:
+        current.append(stored[column])
+    return current
+
 def insert(cve, affectedlist):
+    #pull current devices in db for redundancy check
+    currentdevs = querycolumnlist("DevName", "Affected_Devices")
     query = {
             "CVEID" : cve.cveID,
             "Description": cve.description,
@@ -38,13 +51,20 @@ def insert(cve, affectedlist):
     r = requests.request("POST", f"{url}Active_CVES", headers=header, data=json.dumps(query))
     dbcveID = r.json()["id"]
     for device in affectedlist:
-        query2 = {
-                "DevName": device["Device Name"],
-                "DevModel": device["Model"],
-                "DevCustomer": device["Customer"]
-        }
-        r2 = requests.post(f"{url}Affected_Devices", headers=header, data=json.dumps(query2))
-        query3 = {
-            "table1_id": r2.json()['id']
-        }
-        r3 = requests.post(f"{url}Active_CVES/{dbcveID}/m2mAffected_Devices_Active_CVES", headers=header, data=json.dumps(query3))
+        if device["Device Name"] not in currentdevs:
+            query2 = {
+                    "DevName": device["Device Name"],
+                    "DevModel": device["Model"],
+                    "DevCustomer": device["Customer"]
+            }
+            r2 = requests.post(f"{url}Affected_Devices", headers=header, data=json.dumps(query2))
+            query3 = {
+                "table1_id": r2.json()['id']
+            }
+            r3 = requests.post(f"{url}Active_CVES/{dbcveID}/m2mAffected_Devices_Active_CVES", headers=header, data=json.dumps(query3))
+        else:
+            res = queryOne("id", f"(DevName,eq,{device['Device Name']})", "Affected_Devices")
+            query3 = {
+                "table1_id": res['id']
+            }
+            r3 = requests.post(f"{url}Active_CVES/{dbcveID}/m2mAffected_Devices_Active_CVES", headers=header, data=json.dumps(query3))

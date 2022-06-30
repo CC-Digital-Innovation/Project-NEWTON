@@ -36,7 +36,9 @@ list of coorisponding vendors
 ## Usage
 
 config requires tokens, urls, and some email information. All outlined in the example file provided
+
 run main.py to start up cmdb searching api
+
 run newton.py to search nvd, classify results, hand them to api, and take current actions
 
 
