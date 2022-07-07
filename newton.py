@@ -23,7 +23,6 @@ def main():
     timerange = today- timedelta(hours = 12)
     startdate = today.strftime("%Y-%m-%dT%H:%M:%S:000 UTC-05:00")
     enddate   = timerange.strftime("%Y-%m-%dT%H:%M:%S:000 UTC-05:00")
-
     logger.info(f"Getting Critical Vulnerabilities from National Vulnerability Database")
     logger.info(f"From: {startdate}")
     logger.info(f"To: {enddate}")
@@ -76,12 +75,36 @@ def main():
             with open ("deviceData.json", "w") as f:
                 f.write(json.dumps(devs))
             logger.info("Sending level 1 email")
-            r = email.report(reportName, tableTitle,"deviceData.json", body, subject)
+            #r = email.report(reportName, tableTitle,"deviceData.json", body, subject)
             
-            #check for redundancy
+            #save to noco with redudancy checks
             if cve.cveID not in currentcves:
                 logger.info(f"{cve.cveID} not in Database, saving data")
-                dbsave.insert(cve, devs)
+                cvedata = {
+                        "CVEID" : cve.cveID,
+                        "Description": cve.description,
+                        "CVSS3": cve.cvss3,
+                        "CVSS2": cve.cvss2,
+                        "Active": 1
+                }
+                cvedata["Links"]=cve.links
+                cveid = dbsave.insert(cvedata, "Active_CVES")
+                currentdevs = dbsave.querycolumnlist("DevName", "Affected_Devices")
+                for device in devs:
+                    if device["Device Name"] not in currentdevs:
+                        logger.info("device not in db, adding record")
+                        devdata = {
+                                "DevName": device["Device Name"],
+                                "DevModel": device["Model"],
+                                "DevCustomer": device["Customer"]
+                        }
+                        devid = dbsave.insert(devdata, "Affected_Devices")
+                        dbsave.insertm2m(devid, cveid, "Affected_Devices", "Active_CVES")
+                    else:
+                        logger.info("device in db, updated record")
+                        devid = dbsave.queryOne("id", f"(DevName,eq,{device['Device Name']})", "Affected_Devices")["id"]
+                        response= dbsave.insertm2m(devid, cveid, "Affected_Devices", "Active_CVES")
+                        logger.debug(f"result: {response}")
             else:
                 logger.info(f"{cve.cveID} already saved in DB")
                 #TODO: check for updates

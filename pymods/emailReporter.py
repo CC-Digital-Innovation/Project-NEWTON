@@ -1,5 +1,4 @@
 import configparser
-from distutils.command.upload import upload
 import os
 import requests
 

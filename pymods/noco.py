@@ -37,34 +37,13 @@ def querycolumnlist(column, table):
         current.append(stored[column])
     return current
 
-def insert(cve, affectedlist):
-    #pull current devices in db for redundancy check
-    currentdevs = querycolumnlist("DevName", "Affected_Devices")
+def insert(data, table):
+    r = requests.request("POST", f"{url}{table}", headers=header, data=json.dumps(data))
+    return r.json()["id"]     
+        
+def insertm2m(t1id, t2id, table1, table2):
     query = {
-            "CVEID" : cve.cveID,
-            "Description": cve.description,
-            "CVSS3": cve.cvss3,
-            "CVSS2": cve.cvss2,
-            "Active": 1
+        "table1_id": t1id
     }
-    query["Links"]=cve.links
-    r = requests.request("POST", f"{url}Active_CVES", headers=header, data=json.dumps(query))
-    dbcveID = r.json()["id"]
-    for device in affectedlist:
-        if device["Device Name"] not in currentdevs:
-            query2 = {
-                    "DevName": device["Device Name"],
-                    "DevModel": device["Model"],
-                    "DevCustomer": device["Customer"]
-            }
-            r2 = requests.post(f"{url}Affected_Devices", headers=header, data=json.dumps(query2))
-            query3 = {
-                "table1_id": r2.json()['id']
-            }
-            r3 = requests.post(f"{url}Active_CVES/{dbcveID}/m2mAffected_Devices_Active_CVES", headers=header, data=json.dumps(query3))
-        else:
-            res = queryOne("id", f"(DevName,eq,{device['Device Name']})", "Affected_Devices")
-            query3 = {
-                "table1_id": res['id']
-            }
-            r3 = requests.post(f"{url}Active_CVES/{dbcveID}/m2mAffected_Devices_Active_CVES", headers=header, data=json.dumps(query3))
+    r3 = requests.post(f"{url}Active_CVES/{t2id}/m2m{table1}_{table2}", headers=header, data=json.dumps(query))
+    return r3.json()

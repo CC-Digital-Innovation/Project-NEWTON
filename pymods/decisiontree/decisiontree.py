@@ -1,12 +1,8 @@
 import pandas as pd
-import json
-import loguru
 import pydotplus
 from sklearn import tree
 from sklearn.tree import DecisionTreeClassifier
 from loguru import logger
-import matplotlib.pyplot as plot
-import matplotlib.image as img
 import os
 
 #Directories
@@ -36,7 +32,7 @@ def train_tree():
     return dectree
 
 #Create a png of the decision tree using graphviz
-def graph_tree(dectree: DecisionTreeClassifier,features):
+def graph_tree(dectree: DecisionTreeClassifier, features):
     data = tree.export_graphviz(dectree, out_file=None, feature_names=features)
     graph = pydotplus.graph_from_dot_data(data)
     graph.write_png("dectree.png")
