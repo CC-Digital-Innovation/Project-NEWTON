@@ -1,0 +1,27 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: netwon
+spec:
+  schedule: "0 */12 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          # Environment variables added for Vault
+          - env:
+            - name: JWT_PATH
+              value: /var/run/secrets/kubernetes.io/serviceaccount/token
+            - name: VAULT_ADDR
+              value: http://vault.vault:8200
+            image: registry.quokka.ninja/ccfs/project-newton:latest
+            name: newton
+          # Credentials secret added for authorizing private repository
+          imagePullSecrets:
+          - name: gitlab-cr
+          restartPolicy: OnFailure
+          # Service Account added for Vault
+          serviceAccountName: vault
+      backoffLimit: 3
+      
