@@ -2,6 +2,7 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: netwon
+  namespace: default
 spec:
   schedule: "0 */12 * * *"
   jobTemplate:
