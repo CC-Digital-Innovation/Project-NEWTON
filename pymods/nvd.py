@@ -129,7 +129,7 @@ def generate_cve_list(rawcves):
             if "baseMetricV2" in  rawcve["impact"]:
                 setattr(cve, "cvss2", rawcve["impact"]["baseMetricV2"]["impactScore"])
         else:
-            setattr(cve, "cvss3", None)
-            setattr(cve, "cvss2", None)
+            setattr(cve, "cvss3", 0)
+            setattr(cve, "cvss2", 0)
         cves.append(cve)
     return cves

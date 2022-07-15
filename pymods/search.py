@@ -38,6 +38,7 @@ def get_matching_devices(modelNumsList,manufacturerList):
     stringQuery = stringQuery.strip(".NQ()")
     stringQuery = stringQuery.strip("\n")
     #Query and return devices that match TODO: Find a way to not use eval
+    print(stringQuery)
     RPquery = eval(f"(pysnow.QueryBuilder(){stringQuery})")
     fetch = table.get(query=RPquery).all()
     slimmedDevices = []
@@ -61,17 +62,18 @@ def cmdb(cve):
         if num and len(num.group())>2:
             models.append(num.group())
             mans.append(affect["manufacturer"])
-    test = get_matching_devices(models, mans)
-    """param = {
-        "token" : TOKEN,
-        "modelNumsList" : models,
-        "manufacturerList" : mans
-        }
-    r = requests.get(URL, data = param)
-    test = r.json()"""
-    for result in test:
-        action_devices.append(result)
-    logger.info(f"Number of matching model numbers in cmdb for {cve.cveID}: {len(action_devices)}")
+    if models and mans:
+        test = get_matching_devices(models, mans)
+        """param = {
+            "token" : TOKEN,
+            "modelNumsList" : models,
+            "manufacturerList" : mans
+            }
+        r = requests.get(URL, data = param)
+        test = r.json()"""
+        for result in test:
+            action_devices.append(result)
+        logger.info(f"Number of matching model numbers in cmdb for {cve.cveID}: {len(action_devices)}")
 
 
     return action_devices
