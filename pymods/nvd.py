@@ -125,9 +125,13 @@ def generate_cve_list(rawcves):
         setattr(cve, "links", links)
         if rawcve["impact"]:
             if "baseMetricV3" in rawcve["impact"]:
-                setattr(cve, "cvss3", rawcve["impact"]["baseMetricV3"]["impactScore"])
+                setattr(cve, "cvss3", rawcve["impact"]["baseMetricV3"]["cvssV3"]["baseScore"])
+            else:
+                setattr(cve, "cvss3", 0)
             if "baseMetricV2" in  rawcve["impact"]:
-                setattr(cve, "cvss2", rawcve["impact"]["baseMetricV2"]["impactScore"])
+                setattr(cve, "cvss2", rawcve["impact"]["baseMetricV2"]["cvssV2"]["baseScore"])
+            else:
+                setattr(cve, "cvss2", 0)
         else:
             setattr(cve, "cvss3", 0)
             setattr(cve, "cvss2", 0)

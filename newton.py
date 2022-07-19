@@ -42,7 +42,7 @@ def main():
     logger.info("Using classifier to determine cve impact on our systems")
     for cve in cves:
         logger.info(f"Classifying cve: {cve.cveID}")
-        if cve.affects and cve.cvss3 and cve.cvss2:
+        if cve.affects and (cve.cvss3 or cve.cvss2):
             predictions = classify.predict(CVEclassifier, cve.quantified)
             if 1 in predictions:
                 setattr(cve, "actionable", True)
@@ -80,8 +80,8 @@ def main():
                 with open ("deviceData.json", "w") as f:
                     f.write(json.dumps(devs))
                 logger.info("Sending level 1 email")
-                #r = email.report(reportName, tableTitle,"deviceData.json", body, subject)
-                
+                r = email.report(reportName, tableTitle,"deviceData.json", body, subject)
+                logger.info(f"EmailAPI responded with {r}")
                 #save to noco with redudancy checks
                 if cve.cveID not in currentcves:
                     logger.info(f"{cve.cveID} not in Database, saving data")
@@ -92,7 +92,7 @@ def main():
                             "CVSS2": cve.cvss2,
                             "Active": 1
                     }
-                    cvedata["Links"]=cve.links
+                    cvedata["Links"]=json.dumps(cve.links)
                     cveid = dbsave.insert(cvedata, "Active_CVES")
                     currentdevs = dbsave.querycolumnlist("DevName", "Affected_Devices")
                     for device in devs:

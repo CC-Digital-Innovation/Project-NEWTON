@@ -2,6 +2,7 @@ import configparser
 import os
 import json
 import requests
+from loguru import logger
 
 config = configparser.ConfigParser()
 CWD = os.path.dirname(os.path.dirname(__file__))
@@ -23,6 +24,7 @@ def queryOne(fields, where, table):
     }
     sr = requests.get(f"{url}{table}", headers=header, params=query)
     results = sr.json()
+    logger.info(results)
     result = results[0]
     return result
 
@@ -32,6 +34,7 @@ def querycolumnlist(column, table):
     }
     sr = requests.get(f"{url}{table}/groupby", headers=header, params=query)
     results = sr.json()
+    logger.info(results)
     current = []
     for stored in results:
         current.append(stored[column])
@@ -39,6 +42,7 @@ def querycolumnlist(column, table):
 
 def insert(data, table):
     r = requests.request("POST", f"{url}{table}", headers=header, data=json.dumps(data))
+    logger.info(r.json())
     return r.json()["id"]     
         
 def insertm2m(t1id, t2id, table1, table2):
@@ -46,4 +50,5 @@ def insertm2m(t1id, t2id, table1, table2):
         "table1_id": t1id
     }
     r3 = requests.post(f"{url}Active_CVES/{t2id}/m2m{table1}_{table2}", headers=header, data=json.dumps(query))
+    logger.info(r3.json())
     return r3.json()

@@ -1,6 +1,7 @@
 import configparser
 import os
 import requests
+from loguru import logger
 
 config = configparser.ConfigParser()
 CWD = os.getcwd()
@@ -26,5 +27,6 @@ def report(reportName, tableTitle, filepath, body, subject):
     }
     with open(filepath, "rb") as file:
         uploadFile = {'files' : file}
+        logger.info(f"sending email to {Data['to']} and {Data['cc']}")
         return requests.post(url = URL, data = Data, files = uploadFile)
     
