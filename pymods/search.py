@@ -26,21 +26,23 @@ def get_value(link, value):
 def get_matching_devices(modelNumsList,manufacturerList):
     #Authenticate with token in config                        
     table = snow_client.resource(api_path='/table/cmdb_ci')
-    stringQuery = ""
-    for modelNum, man in zip(modelNumsList, manufacturerList):
-        stringQuery = stringQuery + f"""
-        .field('model_number').contains("{modelNum}")
-        .AND()
-        .field('manufacturer').contains("{man}")
-        .AND()
-        .field('operational_status').equals('1')
-        .NQ()"""
-    stringQuery = stringQuery.strip(".NQ()")
-    stringQuery = stringQuery.strip("\n")
-    #Query and return devices that match TODO: Find a way to not use eval
-    RPquery = eval(f"(pysnow.QueryBuilder(){stringQuery})")
-    fetch = table.get(query=RPquery).all()
     slimmedDevices = []
+    query = pysnow.QueryBuilder()
+    zipped = list(zip(modelNumsList, manufacturerList))
+    flag = False
+    for modelNum, man in zipped:
+        for part in modelNum:
+            if any(modchar.isdigit() for modchar in part):
+                if flag:
+                    query.NQ()
+                query.field('manufacturer').contains(man).AND()
+                query.field('model_number').contains(part).OR()
+                query.field('model_id').contains(part)
+                flag = True
+                break
+    #Query and return devices that match
+    print(len(str(query)))
+    fetch = table.get(query=query).all()
     for device in fetch:
         slim = {}
         slim["Device Name"] = device['name']
@@ -56,12 +58,15 @@ def cmdb(cve):
     models =[]
     mans = []
     param= {}
-    for affect in cve.affects:
-        num = re.search("[0-9]+", affect["Model"])
-        if num and len(num.group())>2:
-            models.append(num.group())
-            mans.append(affect["manufacturer"])
-    if models and mans:
+    if cve.affects:
+        for affect in cve.affects:
+            modParts = affect["Model"].split("_")
+            models.append(modParts)
+            mans.append(affect["manufacturer"])  
+            """num = re.search("[0-9]+", affect["Model"])
+            if num and len(num.group())>2:
+                models.append(num.group())
+                mans.append(affect["manufacturer"])"""
         test = get_matching_devices(models, mans)
         """param = {
             "token" : TOKEN,

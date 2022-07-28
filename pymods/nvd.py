@@ -59,7 +59,7 @@ def clean_cpes(cpelist):
     for cpe in cpelist:
         divide = cpe["cpe"].split(":")
         affdict["manufacturer"] = divide[3].replace("_", " ")
-        affdict["Model"]= divide[4].replace("_", " ")
+        affdict["Model"]= divide[4]
         affdict["Version"]=divide[5]
         affdict["VersionEnd"]=cpe["versionEnd"]
         affects.append(affdict)
