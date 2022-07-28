@@ -23,11 +23,6 @@ def main():
     timerange = today- timedelta(hours = 12)
     enddate = today.strftime("%Y-%m-%dT%H:%M:%S:000 UTC-05:00")
     startdate   = timerange.strftime("%Y-%m-%dT%H:%M:%S:000 UTC-05:00")
-
-    startdate =   "2021-10-06T23:05:07:000 UTC-04:00"
-    enddate   =   "2021-10-07T23:05:07:000 UTC-04:00"
-
-
     logger.info(f"Getting Critical Vulnerabilities from National Vulnerability Database")
     logger.info(f"From: {startdate}")
     logger.info(f"To: {enddate}")

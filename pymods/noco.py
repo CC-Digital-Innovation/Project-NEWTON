@@ -34,7 +34,6 @@ def querycolumnlist(column, table):
     }
     sr = requests.get(f"{url}{table}/groupby", headers=header, params=query)
     results = sr.json()
-    logger.info(results)
     current = []
     for stored in results:
         current.append(stored[column])

@@ -26,10 +26,11 @@ def get_value(link, value):
 def get_matching_devices(modelNumsList,manufacturerList):
     #Authenticate with token in config                        
     table = snow_client.resource(api_path='/table/cmdb_ci')
-    slimmedDevices = []
     query = pysnow.QueryBuilder()
     zipped = list(zip(modelNumsList, manufacturerList))
     flag = False
+    count = 0
+    fetched = []
     for modelNum, man in zipped:
         for part in modelNum:
             if any(modchar.isdigit() for modchar in part):
@@ -39,16 +40,26 @@ def get_matching_devices(modelNumsList,manufacturerList):
                 query.field('model_number').contains(part).OR()
                 query.field('model_id').contains(part)
                 flag = True
+                count = count + 1
                 break
+        if count == 50:
+            count = 0
+            fetch = table.get(query=query).all()
+            fetched.append(fetch)
+            query = pysnow.QueryBuilder()
+            flag = False
     #Query and return devices that match
-    print(len(str(query)))
-    fetch = table.get(query=query).all()
-    for device in fetch:
-        slim = {}
-        slim["Device Name"] = device['name']
-        slim["Model"] = device['model_number']
-        slim["Customer"] = get_value(device['company']['link'], 'name')
-        slimmedDevices.append(slim)
+    if flag:
+        fetch = table.get(query=query).all()
+        fetched.append(fetch)
+    slimmedDevices = []
+    for fetch in fetched:
+        for device in fetch:
+            slim = {}
+            slim["Device Name"] = device['name']
+            slim["Model"] = device['model_number']
+            slim["Customer"] = get_value(device['company']['link'], 'name')
+            slimmedDevices.append(slim)
     return slimmedDevices
 
 
