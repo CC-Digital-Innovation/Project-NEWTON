@@ -17,6 +17,7 @@ header = {
 }
 url = noCoAuth = config.get('urls', 'noco_base')
 
+@logger.catch
 def queryOne(fields, where, table):
     query = {
         'fields' : fields,
@@ -28,6 +29,7 @@ def queryOne(fields, where, table):
     result = results[0]
     return result
 
+@logger.catch
 def querycolumnlist(column, table):
     query = {
         'column_name': column
@@ -39,11 +41,13 @@ def querycolumnlist(column, table):
         current.append(stored[column])
     return current
 
+@logger.catch
 def insert(data, table):
     r = requests.request("POST", f"{url}{table}", headers=header, data=json.dumps(data))
     logger.info(r.json())
     return r.json()["id"]     
-        
+
+@logger.catch        
 def insertm2m(t1id, t2id, table1, table2):
     query = {
         "table1_id": t1id

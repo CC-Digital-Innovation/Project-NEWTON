@@ -32,6 +32,7 @@ class CVE:
 #NOTE: This needs attention. Right now I am pulling out all cpe strings, however I need to be accessing all cpe strings and saving the operator as well.
 #NOTE cont: The "vulnerable" boolean just means the device isn't vulnerable by itself and must be paired with an AND operator meaning it must have one of the given software pieces installed to be vulnerable
 #returns a list of cpe strings
+@logger.catch
 def get_children(nodes, cpelist):
     cpes = {
     "cpe" : "",
@@ -53,6 +54,7 @@ def get_children(nodes, cpelist):
 #Takes a list of CPE strings cpe:CPEversion:letter?:Manufacturer:Model:version:*:*:*:*:*
 #Splits the above format by : and saves manufacture, model and version info to a dictionary that is put into a list a dictionaries coorisponding to the list of cpes
 #returns a list of dictionaries of affected configurations
+@logger.catch
 def clean_cpes(cpelist):
     affects = []
     affdict = {}
@@ -69,6 +71,7 @@ def clean_cpes(cpelist):
 #Rtrieves CVEs from the National Vulnerability Database API
 #Right now it retrieves one timeframe, but if this goes live it will retrieve CVEs and classify them every 12 hours
 #returns json formated results from api
+@logger.catch
 def get_from_nvd(startdate, enddate):
     
     url = "https://services.nvd.nist.gov/rest/json/cves/1.0"
@@ -87,6 +90,7 @@ def get_from_nvd(startdate, enddate):
 #Looks at each cve in the list of filtered cve objects and compares each affected configuration's manufacturer with a list of manufacturers that we are interested in.
 #Quantifies manufactureres we care about with a 1 and ones we don't with a 0
 #Saves each quantified manufacturer in a list with the cvss score in the format [CVSS3,CVSS2,1 or 0] : [5.5,6.5,0]
+@logger.catch
 def qunatify_Mans(cves):
     ManList = [ "cisco",
                 "palo alto",
@@ -109,6 +113,7 @@ def qunatify_Mans(cves):
 
 #Takes raw results from NVD and filters data we want into a list of CVE objects
 #Calls recursive function for configurations and cpe cleaner for list of dictionaries
+@logger.catch
 def generate_cve_list(rawcves):
     cves = []
     for rawcve in rawcves:

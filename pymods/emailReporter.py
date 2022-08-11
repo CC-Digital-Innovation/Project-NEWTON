@@ -9,7 +9,7 @@ configDir = os.path.join(CWD, "Config")
 configPath = os.path.join(configDir, "config.ini")
 config.read(configPath)
 
-
+@logger.catch
 def report(reportName, tableTitle, filepath, body, subject):
     #Production or testing
     URL = config.get('urls', 'email_api')

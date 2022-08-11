@@ -12,6 +12,7 @@ dectreedir = os.path.join(pymoddir,"decisiontree")
 trainsetpath = os.path.join(dectreedir, "trainset.json")
 
 #Creates a decision tree and trains it using a training set in trainset.json
+@logger.catch
 def train_tree():
     #open and read contents of trainset
     with open(trainsetpath, "r") as f:
@@ -32,12 +33,14 @@ def train_tree():
     return dectree
 
 #Create a png of the decision tree using graphviz
+@logger.catch
 def graph_tree(dectree: DecisionTreeClassifier, features):
     data = tree.export_graphviz(dectree, out_file=None, feature_names=features)
     graph = pydotplus.graph_from_dot_data(data)
     graph.write_png("dectree.png")
 
 #Run predictions on incoming values
+@logger.catch
 def predict(dectree: DecisionTreeClassifier, values):
     predict = dectree.predict(values)
     return predict

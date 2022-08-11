@@ -1,5 +1,9 @@
 import datetime
 import json
+import sys
+import logging
+import configparser
+import os
 from loguru import logger
 from datetime import timedelta
 import pymods.decisiontree.decisiontree as classify
@@ -18,10 +22,44 @@ import pymods.noco as dbsave
 #Done: Search through CMDB for configurations that match CVE configurations
 #TODO: Email matching list of configs with email api
 
+TODAY = datetime.datetime.now()
+config = configparser.ConfigParser()
+CWD = os.getcwd()
+configDir = os.path.join(CWD, "Config")
+configPath = os.path.join(configDir, "config.ini")
+config.read(configPath)
+
+@logger.catch
+def begin_logs(sysname = None, sysport = None):
+    logger.info("-----------------------------------------------------------------------------------")
+    logger.info(f"Starting a log on {TODAY}")
+    if sysname and sysport:
+        logger.info(f"Server logging is on and logging to {sysname}:{sysport}")
+    logger.info("-----------------------------------------------------------------------------------")
+
+#Initialize logger and logs, individual log levels for various log locations
+@logger.catch
+def init_logs():
+    logger.remove()
+    logger.debug('setting console log')
+    logger.add(sys.stderr, colorize=True, level="DEBUG")
+    if "Logging" in config.sections():
+        sysname = config.get('Logging', 'SyslogName')
+        sysport = config.get('Logging', 'SyslogPort')
+        if sysname and sysport:
+            syslog = logging.handlers.SysLogHandler(address =(str(sysname), int(sysport)))
+            logger.add(syslog)
+            logger.enable("")
+            begin_logs(sysname, sysport)
+    else:
+        begin_logs()
+
+
+@logger.catch
 def main():
-    today = datetime.datetime.now()
-    timerange = today- timedelta(hours = 12)
-    enddate = today.strftime("%Y-%m-%dT%H:%M:%S:000 UTC-05:00")
+    init_logs()
+    timerange = TODAY- timedelta(hours = 12)
+    enddate = TODAY.strftime("%Y-%m-%dT%H:%M:%S:000 UTC-05:00")
     startdate   = timerange.strftime("%Y-%m-%dT%H:%M:%S:000 UTC-05:00")
     logger.info(f"Getting Critical Vulnerabilities from National Vulnerability Database")
     logger.info(f"From: {startdate}")
@@ -52,6 +90,7 @@ def main():
                 logger.info(f"Actionable?: {cve.actionable}")
         else:
             setattr(cve, "actionable", False)
+            logger.info(f"Actionable?: Not enough data in CVE")
     
     #pull current cves in db for redundancy check
     currentcves = dbsave.querycolumnlist("CVEID", "Active_CVES")
@@ -119,6 +158,8 @@ def main():
                 logger.info(f"No devices found in CMDB for {cve.cveID}")
     if logflag:
         logger.info("No actionable CVEs today")
+    logger.info(f"Newton Run complete")
+    logger.info("___________________________________________________________________________________")
 
         
 

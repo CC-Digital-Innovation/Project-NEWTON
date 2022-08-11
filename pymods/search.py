@@ -18,14 +18,17 @@ USER = config.get('snow', 'api_user')
 PASS = config.get('snow', 'api_password')
 INSTANCE = config.get('snow', 'snow_instance')
 snow_client = pysnow.Client(instance = INSTANCE, user = USER, password = PASS)
+TABLE = snow_client.resource(api_path='/table/cmdb_ci')
 
+
+@logger.catch
 def get_value(link, value):
     r = requests.get(link, auth = HTTPBasicAuth(USER, PASS))
     return r.json()['result'][value]
 
+@logger.catch
 def get_matching_devices(modelNumsList,manufacturerList):
     #Authenticate with token in config                        
-    table = snow_client.resource(api_path='/table/cmdb_ci')
     query = pysnow.QueryBuilder()
     zipped = list(zip(modelNumsList, manufacturerList))
     flag = False
@@ -44,26 +47,29 @@ def get_matching_devices(modelNumsList,manufacturerList):
                 break
         if count == 50:
             count = 0
-            fetch = table.get(query=query).all()
+            fetch = TABLE.get(query=query).all()
             fetched.append(fetch)
             query = pysnow.QueryBuilder()
             flag = False
     #Query and return devices that match
     if flag:
-        fetch = table.get(query=query).all()
+        fetch = TABLE.get(query=query).all()
         fetched.append(fetch)
     slimmedDevices = []
     for fetch in fetched:
         for device in fetch:
             slim = {}
             slim["Device Name"] = device['name']
-            slim["Model"] = device['model_number']
+            if device['model_number']:
+                slim["Model"] = device['model_number']
+            elif device["model_id"]:
+                slim["Model"] = device['model_id']
             slim["Customer"] = get_value(device['company']['link'], 'name')
             slimmedDevices.append(slim)
     return slimmedDevices
 
 
-
+@logger.catch
 def cmdb(cve):
     action_devices= []
     models =[]
@@ -74,11 +80,7 @@ def cmdb(cve):
             modParts = affect["Model"].split("_")
             models.append(modParts)
             mans.append(affect["manufacturer"])  
-            """num = re.search("[0-9]+", affect["Model"])
-            if num and len(num.group())>2:
-                models.append(num.group())
-                mans.append(affect["manufacturer"])"""
-        test = get_matching_devices(models, mans)
+        devices = get_matching_devices(models, mans)
         """param = {
             "token" : TOKEN,
             "modelNumsList" : models,
@@ -86,7 +88,7 @@ def cmdb(cve):
             }
         r = requests.get(URL, data = param)
         test = r.json()"""
-        for result in test:
+        for result in devices:
             action_devices.append(result)
         logger.info(f"Number of matching model numbers in cmdb for {cve.cveID}: {len(action_devices)}")
 
